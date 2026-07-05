@@ -43,7 +43,7 @@ class Bot840(AutoBot):
         for file in paths:
             module_name = f"{str(file.parent).replace("/", ".")}.{file.stem}"
             await self.load_module(module_name)
-            log.debug("模組 %s 載入完成", file.stem)
+            log.info("模組 %s 載入完成", file.stem)
 
 
     async def event_oauth_authorized(
