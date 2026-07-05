@@ -47,3 +47,5 @@ class PCControl(commands.Component):
 async def setup(bot: "Bot840"):
     """Must have channel:read:redemptions or channel:manage:redemptions scope."""
     await bot.add_component(PCControl(bot))
+    await bot.multi_subscribe([eventsub.ChannelPointsRedeemAddSubscription(
+        broadcaster_user_id=env.OWNER_ID, reward_id="c6c195b3-2d03-4be9-8e01-02732b23d208")])
