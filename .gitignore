@@ -12,3 +12,4 @@ wheels/
 .env
 .tio.tokens.json
 database.db
+test.py
