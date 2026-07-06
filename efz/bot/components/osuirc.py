@@ -3,7 +3,9 @@ from twitchio.ext import commands
 from osuirc import IrcClient as OsuIrcClient
 from efz.bot import Bot840
 from efz import env
-from efz.utils.logger import log
+from efz.utils.logger import component
+
+log = component("osuirc")
 
 async def setup(bot: "Bot840"):
     if env.OSUIRC_USER is None or env.OSUIRC_PASS is None:

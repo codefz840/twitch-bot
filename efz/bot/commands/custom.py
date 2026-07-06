@@ -1,11 +1,14 @@
 from sqlmodel import Session, select, and_
 import twitchio
 from twitchio.ext import commands
-from efz.utils.logger import log
+from efz.utils.logger import component
 from efz.db.database import engine
 from efz.db.models import CustomCommand as MCustomCommand
 import random
 import time
+
+log = component("custom")
+
 
 class CustomCommand(commands.Component):
     def __init__(self, bot: commands.Bot):

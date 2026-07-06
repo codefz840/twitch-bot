@@ -4,11 +4,15 @@ import websockets
 from typing import Any
 from twitchio.ext import commands
 from efz.bot.bot import Bot840
+from efz.utils.logger import component
+
+log = component("tosu")
+log.setLevel("INFO")
 
 class Tosu(commands.Component):
     def __init__(self, bot: Bot840):
         self.bot = bot
-        self.ws = websockets.connect("ws://localhost:24050/ws")
+        self.ws = websockets.connect("ws://localhost:24050/ws", logger=log)
         self._data = None
         self.running = False
         self.task = None
@@ -19,18 +23,20 @@ class Tosu(commands.Component):
         self.task = asyncio.create_task(self.runner())
 
     async def stop(self):
+        log.info("Tosu 已停止")
         self.running = False
         self.task.cancel()
         self.task = None
 
     async def runner(self):
         async with self.ws as ws:
+            log.info("Tosu 已連線")
             while self.running:
                 try:
                     message = await ws.recv()
                     await self.parse(message)
-                except:
-                    pass
+                except Exception as e:
+                    log.error(f"Error in Tosu runner: {e}")
 
     async def parse(self, data: str):
         self._data = json.loads(data)

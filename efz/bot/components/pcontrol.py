@@ -2,11 +2,14 @@ from twitchio import eventsub
 from twitchio.ext import commands
 import twitchio
 from efz.bot import Bot840
-from efz.utils.logger import log
+from efz.utils.logger import component
 from efz import env
 from wayland_automation.keyboard_controller import Keyboard
 import json
 import subprocess
+
+
+log = component("pcontrol")
 
 
 class PCControl(commands.Component):
